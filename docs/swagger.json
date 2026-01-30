@@ -120,6 +120,70 @@
                         "description": "Success"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Admin: Posts"
+                ],
+                "summary": "Create new post (Admin)",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Post"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                }
+            }
+        },
+        "/posts/featured": {
+            "get": {
+                "tags": [
+                    "Public: Posts"
+                ],
+                "summary": "Get featured posts",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/posts/latest": {
+            "get": {
+                "tags": [
+                    "Public: Posts"
+                ],
+                "summary": "Get latest posts",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/posts/popular": {
+            "get": {
+                "tags": [
+                    "Public: Posts"
+                ],
+                "summary": "Get popular posts",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
             }
         },
         "/posts/{idOrSlug}": {
@@ -132,6 +196,90 @@
                     {
                         "in": "path",
                         "name": "idOrSlug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Admin: Posts"
+                ],
+                "summary": "Update post (Admin)",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "idOrSlug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Post"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Admin: Posts"
+                ],
+                "summary": "Delete post (Admin)",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "idOrSlug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/posts/{id}/related": {
+            "get": {
+                "tags": [
+                    "Public: Posts"
+                ],
+                "summary": "Get related posts",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
                         "required": true,
                         "schema": {
                             "type": "string"
