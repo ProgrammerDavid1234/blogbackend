@@ -76,9 +76,11 @@ exports.getCommentsByUser = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/comments
 // @access  Private
 exports.addComment = asyncHandler(async (req, res, next) => {
-  // Add user to req.body
-  req.body.user = req.user.id;
-  
+  // Add user to req.body if user is logged in
+  if (req.user) {
+    req.body.user = req.user.id;
+  }
+
   const post = await Post.findById(req.body.post);
 
   if (!post) {
@@ -129,7 +131,7 @@ exports.updateComment = asyncHandler(async (req, res, next) => {
 
   // Update fields
   const { content, isApproved } = req.body;
-  
+
   if (content) comment.content = content;
   if (typeof isApproved !== 'undefined' && req.user.role === 'admin') {
     comment.isApproved = isApproved;

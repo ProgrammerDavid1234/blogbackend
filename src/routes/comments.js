@@ -20,8 +20,9 @@ router.get('/:id', getComment);
 router.get('/post/:postId', getCommentsByPost);
 router.get('/user/:userId', getCommentsByUser);
 
+
 // Protected routes (require authentication)
-router.use(protect);
+// router.use(protect); // Removed to allow public comments
 
 // Add comment validation
 const commentValidation = [
@@ -29,9 +30,12 @@ const commentValidation = [
   check('post', 'Post ID is required').not().isEmpty()
 ];
 
+// Public route for adding comments
 router.post('/', commentValidation, addComment);
-router.put('/:id', updateComment);
-router.delete('/:id', deleteComment);
+
+// Protected routes for update/delete
+router.put('/:id', protect, updateComment);
+router.delete('/:id', protect, deleteComment);
 
 // Admin only routes
 router.use(authorize('admin'));

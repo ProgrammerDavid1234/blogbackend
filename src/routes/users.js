@@ -23,15 +23,15 @@ const validateCreateUser = [
     .withMessage('Invalid role'),
 ];
 
-router.use(protect, authorize('admin'));
 
+// Public routes
 router.route('/')
   .get(getUsers)
-  .post(validateCreateUser, createUser);
+  .post(protect, authorize('admin'), validateCreateUser, createUser);
 
 router.route('/:id')
   .get(getUser)
-  .put(updateUser)
-  .delete(deleteUser);
+  .put(protect, authorize('admin'), updateUser)
+  .delete(protect, authorize('admin'), deleteUser);
 
 module.exports = router;
