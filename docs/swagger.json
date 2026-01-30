@@ -18,6 +18,9 @@
     "paths": {
         "/home": {
             "get": {
+                "tags": [
+                    "Public: Home"
+                ],
                 "summary": "Get home page data",
                 "parameters": [],
                 "responses": {
@@ -76,6 +79,9 @@
         },
         "/posts": {
             "get": {
+                "tags": [
+                    "Public: Posts"
+                ],
                 "summary": "Get all posts",
                 "parameters": [
                     {
@@ -118,6 +124,9 @@
         },
         "/posts/{idOrSlug}": {
             "get": {
+                "tags": [
+                    "Public: Posts"
+                ],
                 "summary": "Get single post",
                 "parameters": [
                     {
@@ -138,6 +147,9 @@
         },
         "/posts/{id}/view": {
             "post": {
+                "tags": [
+                    "Public: Posts"
+                ],
                 "summary": "Increment post view count",
                 "parameters": [
                     {
@@ -158,6 +170,9 @@
         },
         "/tags/{slug}/posts": {
             "get": {
+                "tags": [
+                    "Public: Tags"
+                ],
                 "summary": "Get posts by tag",
                 "parameters": [
                     {
@@ -178,6 +193,9 @@
         },
         "/categories": {
             "get": {
+                "tags": [
+                    "Public: Categories"
+                ],
                 "summary": "Get all categories",
                 "responses": {
                     "200": {
@@ -188,6 +206,9 @@
         },
         "/categories/{slug}": {
             "get": {
+                "tags": [
+                    "Public: Categories"
+                ],
                 "summary": "Get single category",
                 "parameters": [
                     {
@@ -208,6 +229,9 @@
         },
         "/categories/{slug}/posts": {
             "get": {
+                "tags": [
+                    "Public: Categories"
+                ],
                 "summary": "Get posts by category",
                 "parameters": [
                     {
@@ -228,6 +252,9 @@
         },
         "/events": {
             "get": {
+                "tags": [
+                    "Public: Events"
+                ],
                 "summary": "Get events",
                 "parameters": [
                     {
@@ -251,6 +278,9 @@
         },
         "/authors": {
             "get": {
+                "tags": [
+                    "Public: Authors"
+                ],
                 "summary": "Get all authors",
                 "responses": {
                     "200": {
@@ -261,6 +291,9 @@
         },
         "/authors/{id}": {
             "get": {
+                "tags": [
+                    "Public: Authors"
+                ],
                 "summary": "Get author profile and posts",
                 "parameters": [
                     {
@@ -281,6 +314,9 @@
         },
         "/search": {
             "get": {
+                "tags": [
+                    "Public: Search"
+                ],
                 "summary": "Global search",
                 "parameters": [
                     {
@@ -301,6 +337,9 @@
         },
         "/newsletter/subscribe": {
             "post": {
+                "tags": [
+                    "Public: Newsletter"
+                ],
                 "summary": "Subscribe to newsletter",
                 "requestBody": {
                     "content": {
@@ -325,6 +364,9 @@
         },
         "/settings": {
             "get": {
+                "tags": [
+                    "Admin: Settings"
+                ],
                 "summary": "Get site settings",
                 "responses": {
                     "200": {
@@ -333,6 +375,9 @@
                 }
             },
             "put": {
+                "tags": [
+                    "Admin: Settings"
+                ],
                 "summary": "Update site settings (Admin)",
                 "security": [
                     {
@@ -348,6 +393,9 @@
         },
         "/posts/{id}/feature": {
             "put": {
+                "tags": [
+                    "Admin: Posts"
+                ],
                 "summary": "Toggle post feature status (Admin)",
                 "security": [
                     {
@@ -373,6 +421,9 @@
         },
         "/posts/{id}/trending": {
             "put": {
+                "tags": [
+                    "Admin: Posts"
+                ],
                 "summary": "Toggle post trending status (Admin)",
                 "security": [
                     {
@@ -398,6 +449,9 @@
         },
         "/tags": {
             "get": {
+                "tags": [
+                    "Public: Tags"
+                ],
                 "summary": "Get all tags",
                 "responses": {
                     "200": {
@@ -406,6 +460,9 @@
                 }
             },
             "post": {
+                "tags": [
+                    "Admin: Tags"
+                ],
                 "summary": "Create tag (Admin)",
                 "security": [
                     {
@@ -421,6 +478,9 @@
         },
         "/tags/{id}": {
             "put": {
+                "tags": [
+                    "Admin: Tags"
+                ],
                 "summary": "Update tag (Admin)",
                 "security": [
                     {
@@ -444,6 +504,9 @@
                 }
             },
             "delete": {
+                "tags": [
+                    "Admin: Tags"
+                ],
                 "summary": "Delete tag (Admin)",
                 "security": [
                     {
@@ -469,6 +532,9 @@
         },
         "/gallery": {
             "get": {
+                "tags": [
+                    "Public: Gallery"
+                ],
                 "summary": "Get gallery items",
                 "responses": {
                     "200": {
@@ -477,6 +543,9 @@
                 }
             },
             "post": {
+                "tags": [
+                    "Admin: Gallery"
+                ],
                 "summary": "Upload gallery item (Admin)",
                 "security": [
                     {
@@ -503,6 +572,9 @@
         },
         "/gallery/{id}": {
             "delete": {
+                "tags": [
+                    "Admin: Gallery"
+                ],
                 "summary": "Delete gallery item (Admin)",
                 "security": [
                     {
