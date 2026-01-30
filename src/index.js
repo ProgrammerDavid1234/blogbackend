@@ -16,6 +16,12 @@ const eventRoutes = require('./routes/events');
 const commentRoutes = require('./routes/comments');
 const subscriberRoutes = require('./routes/subscribers');
 const analyticsRoutes = require('./routes/analytics');
+const homeRoutes = require('./routes/home');
+const tagRoutes = require('./routes/tags');
+const authorRoutes = require('./routes/authors');
+const galleryRoutes = require('./routes/gallery');
+const searchRoutes = require('./routes/search');
+const newsletterRoutes = require('./routes/newsletter');
 
 // Import middleware
 const errorHandler = require('./middleware/error');
@@ -34,7 +40,7 @@ const io = socketio(server, {
 // Socket.io connection
 io.on('connection', (socket) => {
   console.log('New WebSocket connection');
-  
+
   // Handle notifications
   socket.on('join', (userId) => {
     socket.join(userId);
@@ -70,6 +76,12 @@ app.use('/api/v1/events', eventRoutes);
 app.use('/api/v1/comments', commentRoutes);
 app.use('/api/v1/subscribers', subscriberRoutes);
 app.use('/api/v1/analytics', analyticsRoutes);
+app.use('/api/v1/home', homeRoutes);
+app.use('/api/v1/tags', tagRoutes);
+app.use('/api/v1/authors', authorRoutes);
+app.use('/api/v1/gallery', galleryRoutes);
+app.use('/api/v1/search', searchRoutes);
+app.use('/api/v1/newsletter', newsletterRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

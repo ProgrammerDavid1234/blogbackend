@@ -25,6 +25,21 @@ exports.getCategoryTree = async (req, res, next) => {
   }
 };
 
+// @desc    Get single category by slug
+// @route   GET /api/v1/categories/:slug
+// @access  Public
+exports.getCategory = async (req, res, next) => {
+  try {
+    const category = await Category.findOne({ slug: req.params.slug });
+    if (!category) {
+      return next(new ErrorResponse('Category not found', 404));
+    }
+    res.status(200).json({ success: true, data: category });
+  } catch (err) {
+    next(err);
+  }
+};
+
 // @desc    Create category
 // @route   POST /api/v1/categories
 // @access  Private/Admin

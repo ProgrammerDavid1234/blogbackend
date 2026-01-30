@@ -10,12 +10,17 @@ const {
   updatePost,
   deletePost,
   getPostsByCategorySlug,
+  getFeaturedPosts,
+  incrementPostView,
 } = require('../controllers/postController');
 
 const router = express.Router();
 
 // Public
 router.get('/', getPosts);
+router.post('/:id/view', incrementPostView);
+router.get('/featured', getFeaturedPosts);
+router.get('/latest', getRecentPosts); // Alias for recent
 router.get('/recent', getRecentPosts);
 router.get('/popular', getPopularPosts);
 router.get('/:id/related', getRelatedPosts);

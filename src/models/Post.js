@@ -24,25 +24,14 @@ const PostSchema = new mongoose.Schema({
     required: true
   },
   category: {
-    type: String,
-    required: [true, 'Please add a category'],
-    enum: [
-      'Academic',
-      'Tech',
-      'Social',
-      'Cloud',
-      'AI',
-      'Events',
-      'Announcements',
-      'Tutorials',
-      'News',
-      'General'
-    ]
+    type: mongoose.Schema.ObjectId,
+    ref: 'Category',
+    required: [true, 'Please add a category']
   },
   tags: {
     type: [String],
     validate: {
-      validator: function(tags) {
+      validator: function (tags) {
         return tags.length <= 10; // Limit to 10 tags per post
       },
       message: 'Cannot have more than 10 tags'
@@ -85,32 +74,32 @@ const PostSchema = new mongoose.Schema({
 });
 
 // Create post slug from title
-PostSchema.pre('save', function(next) {
+PostSchema.pre('save', function (next) {
   if (this.isModified('title')) {
     this.slug = slugify(this.title, { lower: true, strict: true });
   }
-  
+
   // Set publishedAt when post is first published
   if (this.isModified('status') && this.status === 'published' && !this.publishedAt) {
     this.publishedAt = Date.now();
   }
-  
+
   // Update lastEditedAt on any change
   if (this.isModified() && !this.isNew) {
     this.lastEditedAt = Date.now();
   }
-  
+
   // Calculate read time (average reading speed: 200 words per minute)
   if (this.isModified('content')) {
     const wordCount = this.content.split(/\s+/).length;
     this.readTime = Math.ceil(wordCount / 200);
   }
-  
+
   next();
 });
 
 // Cascade delete comments when a post is deleted
-PostSchema.pre('remove', async function(next) {
+PostSchema.pre('remove', async function (next) {
   await this.model('Comment').deleteMany({ post: this._id });
   next();
 });
@@ -132,7 +121,7 @@ PostSchema.index({
 });
 
 // Static method to get average of post view counts by author
-PostSchema.statics.getAverageViewCount = async function(authorId) {
+PostSchema.statics.getAverageViewCount = async function (authorId) {
   const obj = await this.aggregate([
     {
       $match: { author: authorId }
@@ -155,17 +144,17 @@ PostSchema.statics.getAverageViewCount = async function(authorId) {
 };
 
 // Call getAverageViewCount after save
-PostSchema.post('save', function() {
+PostSchema.post('save', function () {
   this.constructor.getAverageViewCount(this.author);
 });
 
 // Call getAverageViewCount before remove
-PostSchema.pre('remove', function() {
+PostSchema.pre('remove', function () {
   this.constructor.getAverageViewCount(this.author);
 });
 
 // Method to increment view count
-PostSchema.methods.incrementViewCount = async function() {
+PostSchema.methods.incrementViewCount = async function () {
   this.viewCount += 1;
   await this.save();
 };
