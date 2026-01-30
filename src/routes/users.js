@@ -27,11 +27,11 @@ const validateCreateUser = [
 // Public routes
 router.route('/')
   .get(getUsers)
-  .post(protect, authorize('admin'), validateCreateUser, createUser);
+  .post(validateCreateUser, createUser);
 
 router.route('/:id')
   .get(getUser)
-  .put(protect, authorize('admin'), updateUser)
-  .delete(protect, authorize('admin'), deleteUser);
+  .put(updateUser)
+  .delete(deleteUser);
 
 module.exports = router;
