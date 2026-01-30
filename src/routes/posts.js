@@ -12,6 +12,8 @@ const {
   getPostsByCategorySlug,
   getFeaturedPosts,
   incrementPostView,
+  toggleFeature,
+  toggleTrending,
 } = require('../controllers/postController');
 
 const router = express.Router();
@@ -30,5 +32,7 @@ router.get('/:idOrSlug', getPost);
 router.post('/', protect, authorize('admin', 'publisher'), createPost);
 router.put('/:id', protect, authorize('admin', 'publisher'), updatePost);
 router.delete('/:id', protect, authorize('admin', 'publisher'), deletePost);
+router.put('/:id/feature', protect, authorize('admin', 'publisher'), toggleFeature);
+router.put('/:id/trending', protect, authorize('admin', 'publisher'), toggleTrending);
 
 module.exports = router;

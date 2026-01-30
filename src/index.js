@@ -24,6 +24,7 @@ const authorRoutes = require('./routes/authors');
 const galleryRoutes = require('./routes/gallery');
 const searchRoutes = require('./routes/search');
 const newsletterRoutes = require('./routes/newsletter');
+const settingsRoutes = require('./routes/settings');
 
 // Import middleware
 const errorHandler = require('./middleware/error');
@@ -87,6 +88,7 @@ app.use('/api/v1/authors', authorRoutes);
 app.use('/api/v1/gallery', galleryRoutes);
 app.use('/api/v1/search', searchRoutes);
 app.use('/api/v1/newsletter', newsletterRoutes);
+app.use('/api/v1/settings', settingsRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
