@@ -6,6 +6,8 @@ const morgan = require('morgan');
 const http = require('http');
 const socketio = require('socket.io');
 const path = require('path');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../docs/swagger.json');
 
 // Import routes
 const authRoutes = require('./routes/auth');
@@ -66,6 +68,9 @@ app.use(morgan('dev'));
 
 // Set static folder
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
+// Swagger Documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routes
 app.use('/api/v1/auth', authRoutes);
