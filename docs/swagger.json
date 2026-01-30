@@ -930,6 +930,45 @@
                         "type": "string"
                     }
                 }
+            },
+            "PostInput": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "excerpt": {
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string",
+                        "description": "Category ID"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "image": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "draft",
+                            "published"
+                        ]
+                    }
+                },
+                "required": [
+                    "title",
+                    "content",
+                    "category"
+                ]
             }
         }
     }
